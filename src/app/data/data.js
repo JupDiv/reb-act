@@ -1,42 +1,45 @@
-const complectData = {
-  categories: [
-    {
-      id: 1,
-      nameCategory: 'cover',
-      image: 'https://example.com/electronics.jpg',
-    },
-    {
-      id: 2,
-      nameCategory: 'radiator_cover',
-      image: 'https://example.com/books.jpg',
-    },
-    {
-      id: 3,
-      nameCategory: 'module',
-      image: 'https://example.com/clothing.jpg',
-    },
-    {
-      id: 4,
-      nameCategory: 'electrical',
-      image: 'https://example.com/home-appliances.jpg',
-    },
-    {
-      id: 5,
-      nameCategory: 'N-type',
-      image: 'https://example.com/sports.jpg',
-    },
-    {
-      id: 6,
-      nameCategory: 'multimetr',
-      image: 'https://example.com/toys.jpg',
-    },
-    {
-      id: 7,
-      nameCategory: 'back_cover',
-      image: 'https://example.com/beauty-products.jpg',
-    },
-  ],
-};
+const complectCategories = [
+  {
+    id: 1,
+    nameCategory: 'cover',
+    image: 'https://example.com/electronics.jpg',
+  },
+  {
+    id: 2,
+    nameCategory: 'radiator_cover',
+    image: 'https://example.com/books.jpg',
+  },
+  { id: 3, nameCategory: 'module', image: 'https://example.com/clothing.jpg' },
+  {
+    id: 4,
+    nameCategory: 'electrical',
+    image: 'https://example.com/home-appliances.jpg',
+  },
+  { id: 5, nameCategory: 'N-type', image: 'https://example.com/sports.jpg' },
+  { id: 6, nameCategory: 'multimetr', image: 'https://example.com/toys.jpg' },
+  {
+    id: 7,
+    nameCategory: 'back_cover',
+    image: 'https://example.com/beauty-products.jpg',
+  },
+];
+
+const setupDevices = [
+  { id: 1, nameCategory: '280', description: 'This is a description for dev.' },
+  { id: 2, nameCategory: '390', description: 'This is a description for dev.' },
+  { id: 3, nameCategory: '480', description: 'This is a description for dev.' },
+  { id: 4, nameCategory: '550', description: 'This is a description for dev.' },
+  { id: 5, nameCategory: '640', description: 'This is a description for dev.' },
+  { id: 6, nameCategory: '720', description: 'This is a description for dev.' },
+  { id: 7, nameCategory: '820', description: 'This is a description for dev.' },
+  { id: 8, nameCategory: '920', description: 'This is a description for dev.' },
+  { id: 9, nameCategory: '2.4', description: 'This is a description for dev.' },
+  {
+    id: 10,
+    nameCategory: '5.8',
+    description: 'This is a description for dev.',
+  },
+];
 
 const nameDevices = {
   m1: {
@@ -97,6 +100,4 @@ const nameDevices = {
 
 const userData = JSON.parse(process.env.NEXT_PUBLIC_USERS_DATA || '[]');
 
-// Iterate over the names
-
-export { complectData, nameDevices, userData };
+export { complectCategories, nameDevices, userData, setupDevices };

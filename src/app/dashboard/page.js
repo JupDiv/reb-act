@@ -1,6 +1,10 @@
 'use client';
 
-import { complectData, nameDevices } from '@/app/data/data.js';
+import {
+  complectCategories,
+  nameDevices,
+  setupDevices,
+} from '@/app/data/data.js';
 import { useState, useRef, Suspense, useEffect } from 'react';
 import LogoutButton from '@/components/Dashboard/LogoutButton';
 import Header from '@/components/Dashboard/Header';
@@ -64,6 +68,7 @@ const DashboardContent = () => {
           selectedDevice,
           selectedCategory,
           value: inputValue,
+          taskType,
         }),
         headers: {
           'Content-Type': 'application/json',
@@ -101,12 +106,21 @@ const DashboardContent = () => {
               nameDevices={nameDevices}
               onSelectDevice={handleSelectDevice}
             />
-            <CategorySelector
-              selectedCategory={selectedCategory}
-              selectButton={selectButton}
-              complectData={complectData}
-              onSelectCategory={handleSelectCategory}
-            />
+            {/*
+              Вибір масиву категорій залежно від типу завдання
+            */}
+            {(() => {
+              const currentCategories =
+                taskType === 'Налаштування' ? setupDevices : complectCategories;
+              return (
+                <CategorySelector
+                  selectedCategory={selectedCategory}
+                  selectButton={selectButton}
+                  currentCategories={currentCategories}
+                  onSelectCategory={handleSelectCategory}
+                />
+              );
+            })()}
             <SubmitButton
               isSubmitting={isSubmitting}
               handleSubmit={handleSubmit}

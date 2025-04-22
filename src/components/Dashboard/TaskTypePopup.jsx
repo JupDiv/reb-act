@@ -1,5 +1,5 @@
 const TaskTypePopup = ({ onSelect }) => {
-  const options = ['Збірка']; //'Пайка', 'Налаштування', 'Рекламація'
+  const options = ['Збірка', 'Налаштування']; //'Пайка', 'Налаштування', 'Рекламація'
 
   return (
     <div className="fixed inset-0 z-50 bg-black bg-opacity-60 flex items-center justify-center">

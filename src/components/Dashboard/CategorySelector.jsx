@@ -1,7 +1,8 @@
 const CategorySelector = ({
   selectedCategory,
+  currentCategories,
   onSelectCategory,
-  complectData,
+  taskType,
 }) => {
   const handleSelect = (name) => {
     onSelectCategory(name);
@@ -10,10 +11,12 @@ const CategorySelector = ({
   return (
     <div className="w-full sm:w-1/2 md:w-1/3 mt-3">
       <h2 className="text-xl text-emerald-400 uppercase mb-2 text-center">
-        Обери тут категорію роботи:
+        {taskType === 'Налаштування'
+          ? 'Обери налаштування:'
+          : 'Обери категорію роботи:'}
       </h2>
       <ul className="flex gap-2 flex-wrap">
-        {complectData.categories.map(({ id, nameCategory }) => (
+        {currentCategories.map(({ id, nameCategory }) => (
           <li
             key={id}
             className={`w-full sm:w-1/2 md:w-1/3 text-sm px-4 py-3 rounded-md border border-emerald-700 text-center cursor-pointer transition-all duration-200 transform ${
