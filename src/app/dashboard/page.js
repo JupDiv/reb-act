@@ -63,85 +63,102 @@ const DashboardContent = () => {
   };
 
   return (
-    <div className={'mt-5 flex flex-col items-center'}>
-      <div
-        className={
-          'flex flex-col items-center w-full text-center border-b-3 border-emerald-700 pb-3'
-        }
-      >
-        <h1 className="text-emerald-950 text-lg ">Dashboard</h1>
-        <p>Welcome to the dashboard!</p>
-        <p>Hey {email}!</p>
+    <>
+      <div className="w-full bg-emerald-900 text-white py-4 px-6 flex justify-between items-center shadow-md">
+        <h1 className="text-2xl font-bold tracking-widest uppercase">
+          REB Action Panel
+        </h1>
+        <span className="text-sm opacity-80">Статус: працює {email}</span>
       </div>
-      <div className="flex flex-col items-center aliggn-items-center m-3">
-        <h2 className="text-3xl text-center">Обери номер виробу:</h2>
+      <div className={'mt-5 flex flex-col items-center'}>
         <div
-          className="mt-2 text-center flex flex-col items-center"
-          style={{ marginTop: '20px' }}
+          className={
+            'flex flex-col items-center w-full text-center border-b-3 border-emerald-700 pb-3'
+          }
         >
-          <input
-            type="number"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            placeholder="Введіть число"
-            className="p-2 border rounded-md mt-2"
-            style={{ padding: '20px', marginBottom: '10px' }}
-          />
+          <h1 className="text-emerald-700 text-xl font-semibold uppercase tracking-wide">
+            Dashboard
+          </h1>
+          <p className="text-emerald-500">Це дашборд для сбірки виробів!</p>
         </div>
-        <div className="w-full sm:w-1/2 md:w-1/3 mt-3">
-          <h2 className="text-3xl text-center m-3">Обери вироб:</h2>
-          <ul className="flex gap-2 flex-wrap ">
-            {Object.values(nameDevices).map(({ id, name }) => (
-              <li
-                key={id}
-                className="w-full sm:w-1/2 md:w-1/3 text-1xl bg-emerald-950 text-white text-center rounded-md"
-                onClick={() => selectedButton('deviceName', name)}
-                style={
-                  selectedDevice === name ? { backgroundColor: 'blue' } : {}
-                }
-              >
-                {name}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h2 className="text-3xl text-center m-3">
-            Обери тут категорію роботи:
+        <div className="flex flex-col items-center aliggn-items-center m-3">
+          <h2 className="text-xl text-emerald-200 uppercase mb-2 text-center">
+            Обери номер виробу:
           </h2>
-          <ul className="flex gap-2 flex-wrap">
-            {complectData.categories.map(({ id, nameCategory }) => (
-              <li
-                key={id}
-                className="w-full sm:w-1/2 md:w-1/3 text-1xl bg-emerald-950 text-white text-center rounded-md"
-                onClick={() => selectedButton('categoryJobName', nameCategory)}
-                style={
-                  selectedCategory === nameCategory
-                    ? { backgroundColor: 'blue' }
-                    : {}
-                }
-              >
-                {nameCategory}
-              </li>
-            ))}
-          </ul>
-        </div>
-        {isSubmitting ? (
-          <div className="flex justify-center mt-4">
-            <div className="animate-spin rounded-full h-8 w-8 border-4 border-emerald-600 border-t-transparent"></div>
-          </div>
-        ) : (
-          <button
-            onClick={() => handleSubmit()}
-            className="bg-emerald-700 text-white px-4 py-2 rounded-md flex justify-center items-center mt-4"
-            style={{ padding: '10px', marginTop: '20px' }}
+          <div
+            className="mt-2 text-center flex flex-col items-center"
+            style={{ marginTop: '20px' }}
           >
-            Submit
-          </button>
-        )}
-        <LogoutButton />
+            <input
+              type="number"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              placeholder="Введіть число"
+              className="p-3 border border-emerald-800 bg-emerald-100 text-emerald-950 rounded-md mt-2 focus:outline-none focus:ring-2 focus:ring-emerald-600"
+              style={{ marginBottom: '10px' }}
+            />
+          </div>
+          <div className="w-full sm:w-1/2 md:w-1/3 mt-3">
+            <h2 className="text-xl text-emerald-300 uppercase mb-2 text-center">
+              Обери вироб:
+            </h2>
+            <ul className="flex gap-2 flex-wrap ">
+              {Object.values(nameDevices).map(({ id, name }) => (
+                <li
+                  key={id}
+                  className={`w-full sm:w-1/2 md:w-1/3 text-sm px-2 py-2 rounded-md border border-emerald-700 ${
+                    selectedDevice === name
+                      ? 'bg-emerald-700 text-white'
+                      : 'bg-emerald-950 text-emerald-100'
+                  }`}
+                  onClick={() => selectedButton('deviceName', name)}
+                >
+                  {name}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h2 className="text-xl text-emerald-400 uppercase m-3 text-center">
+              Обери тут категорію роботи:
+            </h2>
+            <ul className="flex gap-2 flex-wrap">
+              {complectData.categories.map(({ id, nameCategory }) => (
+                <li
+                  key={id}
+                  className={`w-full sm:w-1/2 md:w-1/3 text-sm px-2 py-2 rounded-md border border-emerald-700 ${
+                    selectedCategory === nameCategory
+                      ? 'bg-emerald-700 text-white'
+                      : 'bg-emerald-950 text-emerald-100'
+                  }`}
+                  onClick={() =>
+                    selectedButton('categoryJobName', nameCategory)
+                  }
+                >
+                  {nameCategory}
+                </li>
+              ))}
+            </ul>
+          </div>
+          {isSubmitting ? (
+            <div className="flex justify-center mt-4">
+              <div className="animate-spin rounded-full h-8 w-8 border-4 border-emerald-600 border-t-transparent"></div>
+            </div>
+          ) : (
+            <button
+              onClick={() => handleSubmit()}
+              className="bg-emerald-800 hover:bg-emerald-600 text-white font-semibold px-6 py-2 rounded-md mt-6 tracking-wide transition-all duration-200"
+              style={{ marginTop: '20px' }}
+            >
+              Submit
+            </button>
+          )}
+          <div className="mt-6">
+            <LogoutButton />
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
