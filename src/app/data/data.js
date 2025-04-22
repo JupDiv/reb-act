@@ -96,7 +96,6 @@ const nameDevices = {
 };
 
 const userData = JSON.parse(process.env.NEXT_PUBLIC_USERS_DATA || '[]');
-console.log(userData);
 
 // Iterate over the names
 
