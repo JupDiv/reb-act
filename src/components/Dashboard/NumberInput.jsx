@@ -1,11 +1,13 @@
-const NumberInput = ({ inputValue, setInputValue }) => {
+const NumberInput = ({ inputValue, setInputValue, taskType }) => {
   return (
     <div
       className="mt-2 text-center flex flex-col items-center"
       style={{ marginTop: '20px' }}
     >
       <h2 className="text-xl text-emerald-400 uppercase mb-2 text-center">
-        Обери номер виробу:
+        {taskType === 'Налаштування'
+          ? 'Обери потужність:'
+          : 'Обери номер виробу:'}
       </h2>
       <input
         type="number"

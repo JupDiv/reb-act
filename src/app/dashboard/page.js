@@ -92,13 +92,13 @@ const DashboardContent = () => {
     <>
       {!taskType && <TaskTypePopup onSelect={setTaskType} />}
       <Header email={email} />
-
       {taskType && (
         <div className="mt-5 flex flex-col items-center">
           <div className="flex flex-col items-center m-3">
             <NumberInput
               inputValue={inputValue}
               setInputValue={setInputValue}
+              taskType={taskType}
             />
             <DeviceSelector
               selectedDevice={selectedDevice}
@@ -106,9 +106,6 @@ const DashboardContent = () => {
               nameDevices={nameDevices}
               onSelectDevice={handleSelectDevice}
             />
-            {/*
-              Вибір масиву категорій залежно від типу завдання
-            */}
             {(() => {
               const currentCategories =
                 taskType === 'Налаштування' ? setupDevices : complectCategories;
