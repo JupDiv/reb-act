@@ -86,13 +86,6 @@ const DashboardContent = () => {
       <Header email={email} />
 
       <div className="mt-5 flex flex-col items-center">
-        <div className="flex flex-col items-center w-full text-center border-b-3 border-emerald-700 pb-3">
-          <h1 className="text-emerald-700 text-xl font-semibold uppercase tracking-wide">
-            Dashboard
-          </h1>
-          <p className="text-emerald-500">Це дашборд для збірки виробів!</p>
-        </div>
-
         <div className="flex flex-col items-center m-3">
           <NumberInput inputValue={inputValue} setInputValue={setInputValue} />
           <DeviceSelector
