@@ -63,7 +63,7 @@ const DashboardContent = () => {
       >
         <h1 className="text-emerald-950 text-lg ">Dashboard</h1>
         <p>Welcome to the dashboard!</p>
-        <p>Hey User {email}!</p>
+        <p>Hey {email}!</p>
       </div>
       <div className="flex flex-col items-center aliggn-items-center m-3">
         <h2 className="text-3xl text-center">Обери номер виробу:</h2>
