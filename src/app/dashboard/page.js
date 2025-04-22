@@ -9,6 +9,7 @@ const DashboardContent = () => {
   const [selectedDevice, setSelectedDevice] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [inputValue, setInputValue] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const selectButton = useRef({
     deviceName: null,
     categoryJobName: null,
@@ -35,23 +36,30 @@ const DashboardContent = () => {
   };
 
   const handleSubmit = async () => {
-    const response = await fetch('/api/send', {
-      method: 'POST',
-      body: JSON.stringify({
-        email,
-        selectedDevice,
-        selectedCategory,
-        value: inputValue,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    setIsSubmitting(true);
+    try {
+      const response = await fetch('/api/send', {
+        method: 'POST',
+        body: JSON.stringify({
+          email,
+          selectedDevice,
+          selectedCategory,
+          value: inputValue,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-    const result = await response.json();
-    setSelectedDevice(null);
-    setSelectedCategory(null);
-    setInputValue('');
+      const result = await response.json();
+      setSelectedDevice(null);
+      setSelectedCategory(null);
+      setInputValue('');
+    } catch (error) {
+      console.error('Помилка при відправці:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -118,13 +126,19 @@ const DashboardContent = () => {
             ))}
           </ul>
         </div>
-        <button
-          onClick={() => handleSubmit()}
-          className="bg-emerald-700 text-white px-4 py-2 rounded-md flex justify-center items-center mt-4"
-          style={{ padding: '10px', marginTop: '20px' }}
-        >
-          Submit
-        </button>
+        {isSubmitting ? (
+          <div className="flex justify-center mt-4">
+            <div className="animate-spin rounded-full h-8 w-8 border-4 border-emerald-600 border-t-transparent"></div>
+          </div>
+        ) : (
+          <button
+            onClick={() => handleSubmit()}
+            className="bg-emerald-700 text-white px-4 py-2 rounded-md flex justify-center items-center mt-4"
+            style={{ padding: '10px', marginTop: '20px' }}
+          >
+            Submit
+          </button>
+        )}
         <LogoutButton />
       </div>
     </div>
