@@ -9,6 +9,7 @@ import DeviceSelector from '@/components/Dashboard/DeviceSelector';
 import CategorySelector from '@/components/Dashboard/CategorySelector';
 import SubmitButton from '@/components/Dashboard/SubmitButton';
 import StatusDialog from '@/components/Dashboard/StatusDialog';
+import TaskTypePopup from '@/components/Dashboard/TaskTypePopup';
 
 const DashboardContent = () => {
   const [email, setEmail] = useState('');
@@ -18,6 +19,7 @@ const DashboardContent = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [submitError, setSubmitError] = useState(false);
+  const [taskType, setTaskType] = useState(null);
   const selectButton = useRef({
     deviceName: null,
     categoryJobName: null,
@@ -83,32 +85,38 @@ const DashboardContent = () => {
 
   return (
     <>
+      {!taskType && <TaskTypePopup onSelect={setTaskType} />}
       <Header email={email} />
 
-      <div className="mt-5 flex flex-col items-center">
-        <div className="flex flex-col items-center m-3">
-          <NumberInput inputValue={inputValue} setInputValue={setInputValue} />
-          <DeviceSelector
-            selectedDevice={selectedDevice}
-            selectButton={selectButton}
-            nameDevices={nameDevices}
-            onSelectDevice={handleSelectDevice}
-          />
-          <CategorySelector
-            selectedCategory={selectedCategory}
-            selectButton={selectButton}
-            complectData={complectData}
-            onSelectCategory={handleSelectCategory}
-          />
-          <SubmitButton
-            isSubmitting={isSubmitting}
-            handleSubmit={handleSubmit}
-          />
-          <div className="mt-6">
-            <LogoutButton />
+      {taskType && (
+        <div className="mt-5 flex flex-col items-center">
+          <div className="flex flex-col items-center m-3">
+            <NumberInput
+              inputValue={inputValue}
+              setInputValue={setInputValue}
+            />
+            <DeviceSelector
+              selectedDevice={selectedDevice}
+              selectButton={selectButton}
+              nameDevices={nameDevices}
+              onSelectDevice={handleSelectDevice}
+            />
+            <CategorySelector
+              selectedCategory={selectedCategory}
+              selectButton={selectButton}
+              complectData={complectData}
+              onSelectCategory={handleSelectCategory}
+            />
+            <SubmitButton
+              isSubmitting={isSubmitting}
+              handleSubmit={handleSubmit}
+            />
+            <div className="mt-6">
+              <LogoutButton />
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       <StatusDialog
         showDialog={showDialog}
