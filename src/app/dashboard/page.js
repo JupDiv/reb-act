@@ -1,10 +1,10 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
 import { complectData, nameDevices } from '@/app/data/data.js';
-import { useState, useRef } from 'react';
+import { useState, useRef, Suspense } from 'react';
 import LogoutButton from '@/components/LogoutButton/LogoutButton.jsx';
 
-const Dashboard = () => {
+const DashboardContent = () => {
   const searchParams = useSearchParams();
   const email = searchParams.get('email');
   const [selectedDevice, setSelectedDevice] = useState(null);
@@ -60,7 +60,6 @@ const Dashboard = () => {
   // });
 
   // Тут можна додати реальний експорт до Excel або API-виклик
-
   return (
     <div className={'mt-5 flex flex-col items-center'}>
       <div
@@ -137,4 +136,16 @@ const Dashboard = () => {
     </div>
   );
 };
+
+const Dashboard = () => (
+  <Suspense
+    fallback={
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-emerald-700 border-solid"></div>
+      </div>
+    }
+  >
+    <DashboardContent />
+  </Suspense>
+);
 export default Dashboard;
