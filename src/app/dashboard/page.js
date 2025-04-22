@@ -28,21 +28,18 @@ const DashboardContent = () => {
   };
 
   const handleSubmit = async () => {
-    const response = await fetch(
-      'https://script.google.com/macros/s/AKfycbyLIrQRwF9ug_YWsqSO3dyrWJxkFy8lHyhArNJrX8hpiNA-wtHROkN7bPHvIFJ-IOEUsA/exec',
-      {
-        method: 'POST',
-        body: JSON.stringify({
-          email,
-          selectedDevice,
-          selectedCategory,
-          value: inputValue,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    const response = await fetch('/api/send', {
+      method: 'POST',
+      body: JSON.stringify({
+        email,
+        selectedDevice,
+        selectedCategory,
+        value: inputValue,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
     console.log('Response:', response);
 
