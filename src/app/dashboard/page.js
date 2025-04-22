@@ -11,6 +11,7 @@ const DashboardContent = () => {
   const [inputValue, setInputValue] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
   const selectButton = useRef({
     deviceName: null,
     categoryJobName: null,
@@ -48,6 +49,7 @@ const DashboardContent = () => {
   const handleSubmit = async () => {
     setIsSubmitting(true);
     try {
+      setSubmitError(false);
       const response = await fetch('/api/send', {
         method: 'POST',
         body: JSON.stringify({
@@ -68,6 +70,7 @@ const DashboardContent = () => {
       setShowDialog(true);
     } catch (error) {
       console.error('Помилка при відправці:', error);
+      setSubmitError(true);
     } finally {
       setIsSubmitting(false);
     }
@@ -170,24 +173,31 @@ const DashboardContent = () => {
               Submit
             </button>
           )}
-          {showDialog && (
-            <div className="mt-4 p-4 bg-emerald-900 text-white rounded-md shadow-md text-center border border-emerald-700 animate-fade-in-down">
-              <p className="text-lg font-semibold">
-                ✅ Дані успішно надіслані!
-              </p>
-              <button
-                className="mt-3 text-sm underline text-emerald-300 hover:text-white"
-                onClick={() => setShowDialog(false)}
-              >
-                Закрити
-              </button>
-            </div>
-          )}
           <div className="mt-6">
             <LogoutButton />
           </div>
         </div>
       </div>
+      {(showDialog || submitError) && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-emerald-900 text-white p-6 rounded-md shadow-lg border border-emerald-700 text-center w-80">
+            <p className="text-lg font-semibold">
+              {submitError
+                ? '❌ Дані не вдалося надіслати!'
+                : '✅ Дані успішно надіслані!'}
+            </p>
+            <button
+              className="mt-4 px-4 py-2 bg-emerald-800 hover:bg-emerald-700 rounded-md text-sm"
+              onClick={() => {
+                setShowDialog(false);
+                setSubmitError(false);
+              }}
+            >
+              Закрити
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 };
