@@ -29,7 +29,7 @@ const DashboardContent = () => {
 
   const handleSubmit = async () => {
     const response = await fetch(
-      'https://script.google.com/macros/s/AKfycbytIOGuXjiL7jxjrjZ3ij5MK_AI5zHKXNxcWj0nAoZuDfS005mUdti7q-aOR7ZAPgP4mg/exec',
+      'https://script.google.com/macros/s/AKfycbyLIrQRwF9ug_YWsqSO3dyrWJxkFy8lHyhArNJrX8hpiNA-wtHROkN7bPHvIFJ-IOEUsA/exec',
       {
         method: 'POST',
         body: JSON.stringify({
