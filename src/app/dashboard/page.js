@@ -2,7 +2,6 @@
 import { useSearchParams } from 'next/navigation';
 import { complectData, nameDevices } from '@/app/data/data.js';
 import { useState, useRef } from 'react';
-import { usePathname } from 'next/navigation';
 import LogoutButton from '@/components/LogoutButton/LogoutButton.jsx';
 
 const Dashboard = () => {
@@ -15,7 +14,6 @@ const Dashboard = () => {
     deviceName: null,
     categoryJobName: null,
   });
-  const pathname = usePathname();
 
   const selectedButton = (type, name) => {
     if (type === 'deviceName') {
