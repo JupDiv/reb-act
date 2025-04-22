@@ -95,6 +95,9 @@ const nameDevices = {
   },
 };
 
+const userData = JSON.parse(process.env.NEXT_PUBLIC_USERS_DATA || '[]');
+console.log(userData);
+
 // Iterate over the names
 
-export { complectData, nameDevices };
+export { complectData, nameDevices, userData };

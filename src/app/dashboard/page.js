@@ -1,12 +1,11 @@
 'use client';
-import { useSearchParams } from 'next/navigation';
+
 import { complectData, nameDevices } from '@/app/data/data.js';
-import { useState, useRef, Suspense } from 'react';
+import { useState, useRef, Suspense, useEffect } from 'react';
 import LogoutButton from '@/components/LogoutButton/LogoutButton.jsx';
 
 const DashboardContent = () => {
-  const searchParams = useSearchParams();
-  const email = searchParams.get('email');
+  const [email, setEmail] = useState('');
   const [selectedDevice, setSelectedDevice] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [inputValue, setInputValue] = useState('');
@@ -14,6 +13,15 @@ const DashboardContent = () => {
     deviceName: null,
     categoryJobName: null,
   });
+
+  useEffect(() => {
+    const localEmail = localStorage.getItem('email');
+    if (!localEmail) {
+      window.location.href = '/login-page';
+    } else {
+      setEmail(localEmail);
+    }
+  }, []);
 
   const selectedButton = (type, name) => {
     if (type === 'deviceName') {
@@ -24,7 +32,6 @@ const DashboardContent = () => {
       setSelectedCategory(name);
       selectButton.current.categoryJobName = name;
     }
-    console.log(selectButton);
   };
 
   const handleSubmit = async () => {
@@ -41,22 +48,12 @@ const DashboardContent = () => {
       },
     });
 
-    console.log('Response:', response);
-
     const result = await response.json();
-    console.log(result);
     setSelectedDevice(null);
     setSelectedCategory(null);
     setInputValue('');
   };
-  // console.log('Submit to Excel:', {
-  //   email,
-  //   selectedDevice,
-  //   selectedCategory,
-  //   value: inputValue,
-  // });
 
-  // Тут можна додати реальний експорт до Excel або API-виклик
   return (
     <div className={'mt-5 flex flex-col items-center'}>
       <div

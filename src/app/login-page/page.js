@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
-// Removed CSS import as Tailwind is used for styling
 import { useRouter } from 'next/navigation';
+import { userData } from '../data/data';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -10,13 +10,17 @@ const LoginPage = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // Add login logic here
-    if (email === '123@123.12' || password === '123') {
-      router.push(
-        `/dashboard?email=${encodeURIComponent(
-          email
-        )}&password=${encodeURIComponent(password)}`
-      );
+
+    if (
+      userData.some(
+        ({ userLogin, userPassword }) =>
+          userLogin === email && userPassword === password
+      )
+    ) {
+      localStorage.setItem('email', email);
+      router.push('/dashboard');
+    } else {
+      alert('Неправильний логін або пароль');
     }
   };
 
