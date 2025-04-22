@@ -10,6 +10,7 @@ const DashboardContent = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [inputValue, setInputValue] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showDialog, setShowDialog] = useState(false);
   const selectButton = useRef({
     deviceName: null,
     categoryJobName: null,
@@ -23,6 +24,15 @@ const DashboardContent = () => {
       setEmail(localEmail);
     }
   }, []);
+
+  useEffect(() => {
+    if (showDialog) {
+      const timeout = setTimeout(() => {
+        setShowDialog(false);
+      }, 3000);
+      return () => clearTimeout(timeout);
+    }
+  }, [showDialog]);
 
   const selectedButton = (type, name) => {
     if (type === 'deviceName') {
@@ -55,6 +65,7 @@ const DashboardContent = () => {
       setSelectedDevice(null);
       setSelectedCategory(null);
       setInputValue('');
+      setShowDialog(true);
     } catch (error) {
       console.error('Помилка при відправці:', error);
     } finally {
@@ -68,7 +79,13 @@ const DashboardContent = () => {
         <h1 className="text-2xl font-bold tracking-widest uppercase">
           REB Action Panel
         </h1>
-        <span className="text-sm opacity-80">Статус: працює {email}</span>
+        <div className="flex items-center gap-2 text-sm opacity-90">
+          <span
+            className="h-3 w-3 rounded-full bg-green-400 animate-pulse shadow-md"
+            title="Працює"
+          ></span>
+          <span>{email}</span>
+        </div>
       </div>
       <div className={'mt-5 flex flex-col items-center'}>
         <div
@@ -82,7 +99,7 @@ const DashboardContent = () => {
           <p className="text-emerald-500">Це дашборд для сбірки виробів!</p>
         </div>
         <div className="flex flex-col items-center aliggn-items-center m-3">
-          <h2 className="text-xl text-emerald-200 uppercase mb-2 text-center">
+          <h2 className="text-xl text-emerald-400 uppercase mb-2 text-center">
             Обери номер виробу:
           </h2>
           <div
@@ -99,7 +116,7 @@ const DashboardContent = () => {
             />
           </div>
           <div className="w-full sm:w-1/2 md:w-1/3 mt-3">
-            <h2 className="text-xl text-emerald-300 uppercase mb-2 text-center">
+            <h2 className="text-xl text-emerald-400 uppercase mb-2 text-center">
               Обери вироб:
             </h2>
             <ul className="flex gap-2 flex-wrap ">
@@ -152,6 +169,19 @@ const DashboardContent = () => {
             >
               Submit
             </button>
+          )}
+          {showDialog && (
+            <div className="mt-4 p-4 bg-emerald-900 text-white rounded-md shadow-md text-center border border-emerald-700 animate-fade-in-down">
+              <p className="text-lg font-semibold">
+                ✅ Дані успішно надіслані!
+              </p>
+              <button
+                className="mt-3 text-sm underline text-emerald-300 hover:text-white"
+                onClick={() => setShowDialog(false)}
+              >
+                Закрити
+              </button>
+            </div>
           )}
           <div className="mt-6">
             <LogoutButton />
