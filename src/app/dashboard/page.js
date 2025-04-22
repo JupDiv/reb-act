@@ -31,12 +31,22 @@ const DashboardContent = () => {
 
   useEffect(() => {
     const localEmail = localStorage.getItem('email');
+    const localTaskType = localStorage.getItem('taskType');
     if (!localEmail) {
       window.location.href = '/login-page';
     } else {
       setEmail(localEmail);
     }
+    if (localTaskType) {
+      setTaskType(localTaskType);
+    }
   }, []);
+
+  useEffect(() => {
+    if (taskType) {
+      localStorage.setItem('taskType', taskType);
+    }
+  }, [taskType]);
 
   useEffect(() => {
     if (showDialog) {
