@@ -27,7 +27,7 @@ const DashboardContent = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [submitError, setSubmitError] = useState(false);
-  const [taskType, setTaskType] = useState(null);
+  const [taskType, setTaskType] = useState('Збірка');
   const selectButton = useRef({
     deviceName: null,
     categoryJobName: null,
