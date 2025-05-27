@@ -1,5 +1,7 @@
 'use client';
 import useFirebaseAuth from '@/hooks/useFirebaseAuth';
+import { analytics } from '@/firebase/config';
+import { logEvent } from 'firebase/analytics';
 
 import {
   complectCategories,
@@ -101,6 +103,11 @@ const DashboardContent = () => {
     }
   };
   if (loading) return null;
+
+  logEvent(analytics, 'task_submitted', {
+    category: 'Налаштування',
+    value: 'login-dashboard',
+  });
   return (
     <>
       {!taskType && <TaskTypePopup onSelect={setTaskType} />}
