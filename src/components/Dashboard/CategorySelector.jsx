@@ -5,7 +5,11 @@ const CategorySelector = ({
   taskType,
 }) => {
   const handleSelect = (name) => {
-    onSelectCategory(name);
+    if (selectedCategory.includes(name)) {
+      onSelectCategory(selectedCategory.filter((n) => n !== name));
+    } else {
+      onSelectCategory([...selectedCategory, name]);
+    }
   };
 
   return (
@@ -20,7 +24,7 @@ const CategorySelector = ({
           <li
             key={id}
             className={`w-full sm:w-1/2 md:w-1/3 text-sm px-4 py-3 rounded-md border border-emerald-700 text-center cursor-pointer transition-all duration-200 transform ${
-              selectedCategory === nameCategory
+              selectedCategory.includes(nameCategory)
                 ? 'bg-emerald-700 text-white scale-95'
                 : 'bg-emerald-950 text-emerald-100 hover:bg-emerald-800 hover:text-white hover:scale-[0.98]'
             }`}
