@@ -21,7 +21,7 @@ const DashboardContent = () => {
 
   const [email, setEmail] = useState('');
   const [selectedDevice, setSelectedDevice] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [inputValueCat, setInputValueCat] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
