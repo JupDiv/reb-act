@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/firebase/config';
@@ -29,10 +29,14 @@ const LoginPage = () => {
     }
   };
 
-  logEvent(analytics, 'task_submitted', {
-    category: 'login-page',
-    value: `login-${email}`,
-  });
+  useEffect(() => {
+    if (typeof window !== 'undefined' && analytics) {
+      logEvent(analytics, 'task_submitted', {
+        category: 'login-page',
+        value: 'login-view',
+      });
+    }
+  }, []);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">

@@ -36,6 +36,15 @@ const DashboardContent = () => {
   });
 
   useEffect(() => {
+    if (typeof window !== 'undefined' && analytics) {
+      logEvent(analytics, 'task_submitted', {
+        category: 'Налаштування',
+        value: 'dashboard',
+      });
+    }
+  }, []);
+
+  useEffect(() => {
     const localEmail = localStorage.getItem('email');
     const localTaskType = localStorage.getItem('taskType');
     if (!localEmail) {
@@ -104,10 +113,6 @@ const DashboardContent = () => {
   };
   if (loading) return null;
 
-  logEvent(analytics, 'task_submitted', {
-    category: 'Налаштування',
-    value: 'login-dashboard',
-  });
   return (
     <>
       {!taskType && <TaskTypePopup onSelect={setTaskType} />}
