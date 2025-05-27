@@ -31,7 +31,12 @@ const complectCategories = [
   },
   {
     id: 7,
-    nameCategory: 'Закручування задньої кришки(back_cover)',
+    nameCategory: 'Закручування задньої кришки (back_cover)',
+    image: 'https://example.com/beauty-products.jpg',
+  },
+  {
+    id: 8,
+    nameCategory: 'Закручування магнітів (magnet)',
     image: 'https://example.com/beauty-products.jpg',
   },
 ];
