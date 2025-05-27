@@ -1,25 +1,37 @@
 const complectCategories = [
   {
     id: 1,
-    nameCategory: 'cover',
+    nameCategory: 'Вставка кулерів (radiator_cover)',
     image: 'https://example.com/electronics.jpg',
   },
   {
     id: 2,
-    nameCategory: 'radiator_cover',
+    nameCategory: 'Вставка кришки для кулерів(cover)',
     image: 'https://example.com/books.jpg',
   },
-  { id: 3, nameCategory: 'module', image: 'https://example.com/clothing.jpg' },
+  {
+    id: 3,
+    nameCategory: 'Вставка модулей (module)',
+    image: 'https://example.com/clothing.jpg',
+  },
   {
     id: 4,
-    nameCategory: 'electrical',
+    nameCategory: 'Розпаювання (electrical)',
     image: 'https://example.com/home-appliances.jpg',
   },
-  { id: 5, nameCategory: 'N-type', image: 'https://example.com/sports.jpg' },
-  { id: 6, nameCategory: 'multimetr', image: 'https://example.com/toys.jpg' },
+  {
+    id: 5,
+    nameCategory: 'Вставка коннекторів (N-type)',
+    image: 'https://example.com/sports.jpg',
+  },
+  {
+    id: 6,
+    nameCategory: 'Прозвонка (multimetr)',
+    image: 'https://example.com/toys.jpg',
+  },
   {
     id: 7,
-    nameCategory: 'back_cover',
+    nameCategory: 'Закручування задньої кришки(back_cover)',
     image: 'https://example.com/beauty-products.jpg',
   },
 ];
