@@ -66,9 +66,8 @@ const DashboardContent = () => {
     selectButton.current.deviceName = name;
   };
 
-  const handleSelectCategory = (name) => {
-    setSelectedCategory(name);
-    selectButton.current.categoryJobName = name;
+  const handleSelectCategory = (newArray) => {
+    setSelectedCategory(newArray);
   };
 
   const handleSubmit = async () => {
@@ -91,7 +90,7 @@ const DashboardContent = () => {
 
       const result = await response.json();
       setSelectedDevice(null);
-      setSelectedCategory(null);
+      setSelectedCategory([]);
       setInputValue('');
       setShowDialog(true);
     } catch (error) {
