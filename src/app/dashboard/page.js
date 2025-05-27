@@ -1,4 +1,5 @@
 'use client';
+import useFirebaseAuth from '@/hooks/useFirebaseAuth';
 
 import {
   complectCategories,
@@ -16,10 +17,13 @@ import StatusDialog from '@/components/Dashboard/StatusDialog';
 import TaskTypePopup from '@/components/Dashboard/TaskTypePopup';
 
 const DashboardContent = () => {
+  const { loading } = useFirebaseAuth();
+
   const [email, setEmail] = useState('');
   const [selectedDevice, setSelectedDevice] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [inputValue, setInputValue] = useState('');
+  const [inputValueCat, setInputValueCat] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [submitError, setSubmitError] = useState(false);
@@ -97,7 +101,7 @@ const DashboardContent = () => {
       setIsSubmitting(false);
     }
   };
-
+  if (loading) return null;
   return (
     <>
       {!taskType && <TaskTypePopup onSelect={setTaskType} />}
@@ -108,7 +112,7 @@ const DashboardContent = () => {
             <NumberInput
               inputValue={inputValue}
               setInputValue={setInputValue}
-              taskType={taskType}
+              textForInput={'Обери номер вибора'}
             />
             <DeviceSelector
               selectedDevice={selectedDevice}
@@ -120,12 +124,21 @@ const DashboardContent = () => {
               const currentCategories =
                 taskType === 'Налаштування' ? setupDevices : complectCategories;
               return (
-                <CategorySelector
-                  selectedCategory={selectedCategory}
-                  selectButton={selectButton}
-                  currentCategories={currentCategories}
-                  onSelectCategory={handleSelectCategory}
-                />
+                <>
+                  {taskType === 'Налаштування' ? (
+                    <NumberInput
+                      inputValue={inputValueCat}
+                      setInputValue={setInputValueCat}
+                      textForInput={'Обери потужність модуля'}
+                    />
+                  ) : null}
+                  <CategorySelector
+                    selectedCategory={selectedCategory}
+                    selectButton={selectButton}
+                    currentCategories={currentCategories}
+                    onSelectCategory={handleSelectCategory}
+                  />
+                </>
               );
             })()}
             <SubmitButton
