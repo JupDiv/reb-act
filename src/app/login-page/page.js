@@ -3,8 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/firebase/config';
-import { analytics } from '@/firebase/config';
-import { logEvent } from 'firebase/analytics';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -28,15 +26,6 @@ const LoginPage = () => {
       console.error('Login error:', error.message);
     }
   };
-
-  useEffect(() => {
-    if (typeof window !== 'undefined' && analytics) {
-      logEvent(analytics, 'task_submitted', {
-        category: 'login-page',
-        value: 'login-view',
-      });
-    }
-  }, []);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">

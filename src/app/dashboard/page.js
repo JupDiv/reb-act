@@ -1,7 +1,5 @@
 'use client';
 import useFirebaseAuth from '@/hooks/useFirebaseAuth';
-import { analytics } from '@/firebase/config';
-import { logEvent, isSupported } from 'firebase/analytics';
 
 import {
   complectCategories,
@@ -34,21 +32,6 @@ const DashboardContent = () => {
     deviceName: null,
     categoryJobName: null,
   });
-
-  useEffect(() => {
-    const sendAnalytics = async () => {
-      if (typeof window !== 'undefined') {
-        const supported = await isSupported();
-        if (supported && analytics) {
-          logEvent(analytics, 'task_submitted', {
-            category: 'Налаштування',
-            value: 'dashboard',
-          });
-        }
-      }
-    };
-    sendAnalytics();
-  }, []);
 
   useEffect(() => {
     const localEmail = localStorage.getItem('email');
