@@ -13,7 +13,7 @@ const CategorySelector = ({
       <h2 className="text-xl text-emerald-400 uppercase mb-2 text-center">
         {taskType === 'Налаштування'
           ? 'Обери налаштування:'
-          : 'Обери категорію роботи:'}
+          : 'Обери категорію процесу:'}
       </h2>
       <ul className="flex gap-2 flex-wrap">
         {currentCategories.map(({ id, nameCategory }) => (

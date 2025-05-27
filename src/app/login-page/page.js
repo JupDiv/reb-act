@@ -1,26 +1,29 @@
 'use client';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { userData } from '../data/data';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '@/firebase/config';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-
-    if (
-      userData.some(
-        ({ userLogin, userPassword }) =>
-          userLogin === email && userPassword === password
-      )
-    ) {
-      localStorage.setItem('email', email);
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      localStorage.setItem('uid', user.uid);
+      localStorage.setItem('email', user.email);
       router.push('/dashboard');
-    } else {
+    } catch (error) {
       alert('Неправильний логін або пароль');
+      console.error('Login error:', error.message);
     }
   };
 

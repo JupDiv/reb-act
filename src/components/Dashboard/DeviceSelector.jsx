@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import NumberInput from './NumberInput';
 
 const DeviceSelector = ({
   selectedDevice,
